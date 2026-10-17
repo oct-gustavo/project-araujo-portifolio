@@ -1,0 +1,99 @@
+/* Assistente de conversa (balão + painel). Tudo preso à classe .cw: o CSS global persiste entre rotas. */
+.cw{--cw-bg:#0A0C12;--cw-sf:#12151F;--cw-sf2:#181D2A;--cw-ln:rgba(206,212,236,.12);--cw-ln2:rgba(206,212,236,.22);--cw-ink:#ECEDF4;--cw-mu:#A0A6BA;--cw-fa:#7D8399;--cw-vi:#9483F2;--cw-vs:#B9AEF7;font-family:'Epilogue Variable','Epilogue','Helvetica Neue',Arial,sans-serif;color:var(--cw-ink);-webkit-font-smoothing:antialiased;line-height:1.5;font-size:16px}
+.cw :where(p,h2,h3,dl,dd){margin:0;padding:0}
+.cw :where(button,input,textarea){font:inherit;color:inherit;letter-spacing:normal}
+.cw :where(button){cursor:pointer}
+.cw :focus-visible{outline:2px solid var(--cw-vs);outline-offset:3px}
+.cw-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* balão */
+.cw-lanc{position:fixed;right:24px;bottom:24px;z-index:70;display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 20px 0 12px;background:var(--cw-ink);color:var(--cw-bg);border:0;border-radius:2px;font-size:15px;font-weight:500;box-shadow:0 18px 40px -16px rgba(0,0,0,.7);transition:opacity .3s ease,transform .3s cubic-bezier(.16,1,.3,1),visibility 0s,background .2s}
+.cw-lanc:hover{background:#fff}
+.cw-lanc-ico{position:relative;display:grid;place-items:center;width:32px;height:32px;background:var(--cw-bg);color:var(--cw-ink);border-radius:2px}
+.cw-lanc-ico i{position:absolute;right:-4px;top:-4px;width:10px;height:10px;background:var(--cw-vi);border:2px solid var(--cw-ink);border-radius:50%}
+.cw-lanc.on{background:var(--cw-sf2);color:var(--cw-ink);box-shadow:inset 0 0 0 1px var(--cw-ln2),0 18px 40px -16px rgba(0,0,0,.7)}
+.cw-lanc.on .cw-lanc-ico{background:transparent}
+.cw-lanc.fora{opacity:0;transform:translateY(16px);visibility:hidden;pointer-events:none;transition:opacity .3s ease,transform .3s ease,visibility 0s .3s}
+/* Menu do celular aberto: o balão sai do caminho. */
+body:has(.nav-menu[aria-expanded="true"]) .cw-lanc{display:none}
+
+.cw-dica{position:fixed;right:24px;bottom:96px;z-index:69;width:288px;padding:16px 44px 16px 18px;background:var(--cw-sf);border:1px solid var(--cw-ln2);border-radius:2px;box-shadow:0 24px 50px -20px rgba(0,0,0,.7);animation:cwSobe .5s cubic-bezier(.16,1,.3,1) both}
+.cw-dica p{font-size:14px;line-height:1.5;color:var(--cw-mu)}
+.cw-dica strong{display:block;color:var(--cw-ink);font-weight:600;font-size:15px;margin-bottom:4px}
+.cw-dica-x{position:absolute;top:4px;right:4px;width:40px;height:40px;background:none;border:0;color:var(--cw-fa);font-size:20px;line-height:1}
+.cw-dica-x:hover{color:var(--cw-ink)}
+
+/* painel */
+.cw-painel{position:fixed;right:24px;bottom:96px;z-index:70;width:392px;max-width:calc(100vw - 48px);height:min(640px,calc(100dvh - 128px));display:flex;flex-direction:column;background:var(--cw-sf);border:1px solid var(--cw-ln2);border-radius:2px;box-shadow:0 40px 80px -30px rgba(0,0,0,.8);animation:cwSobe .45s cubic-bezier(.16,1,.3,1) both;overflow:hidden}
+@keyframes cwSobe{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.cw-topo{display:flex;align-items:center;gap:12px;padding:14px 8px 14px 18px;border-bottom:1px solid var(--cw-ln);background:#0F121A}
+.cw-av{display:grid;place-items:center;width:40px;height:40px;flex:none;background:var(--cw-bg);border:1px solid var(--cw-ln2);border-radius:2px;color:var(--cw-ink)}
+.cw-quem{flex:1;min-width:0}
+.cw-quem h2{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.cw-quem p{font-size:12.5px;color:var(--cw-fa);line-height:1.4}
+.cw-ic{display:grid;place-items:center;flex:none;width:44px;height:44px;background:none;border:0;border-radius:2px;color:var(--cw-mu)}
+.cw-ic:hover{color:var(--cw-ink);background:rgba(206,212,236,.06)}
+.cw-prog{display:flex;gap:4px;padding:0 18px;height:3px;margin-top:-1px}
+.cw-prog i{flex:1;background:#262B3A}
+.cw-prog i.on{background:var(--cw-vs)}
+
+.cw-log{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:20px 18px 12px;display:flex;flex-direction:column;gap:10px}
+.cw-msg{max-width:86%;padding:12px 14px;font-size:14.5px;line-height:1.55;border-radius:2px;white-space:pre-line;overflow-wrap:anywhere;animation:cwMsg .35s cubic-bezier(.16,1,.3,1) both}
+@keyframes cwMsg{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.cw-bot{align-self:flex-start;background:var(--cw-sf2);border:1px solid var(--cw-ln)}
+.cw-eu{align-self:flex-end;background:#2A2452;border:1px solid rgba(185,174,247,.28)}
+.cw-dig{align-self:flex-start;display:flex;gap:5px;padding:14px 16px;background:var(--cw-sf2);border:1px solid var(--cw-ln);border-radius:2px}
+.cw-dig i{width:6px;height:6px;border-radius:50%;background:var(--cw-mu);animation:cwDig 1s infinite ease-in-out}
+.cw-dig i:nth-child(2){animation-delay:.15s}
+.cw-dig i:nth-child(3){animation-delay:.3s}
+@keyframes cwDig{0%,80%,100%{opacity:.25;transform:none}40%{opacity:1;transform:translateY(-3px)}}
+
+.cw-resumo{align-self:stretch;margin-top:6px;border:1px solid rgba(185,174,247,.4);background:#0F121A;border-radius:2px;animation:cwMsg .4s cubic-bezier(.16,1,.3,1) both}
+.cw-resumo h3{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cw-vs);font-weight:500;padding:14px 16px 4px}
+.cw-resumo dl{padding:4px 16px 14px}
+.cw-resumo div{display:grid;grid-template-columns:88px 1fr;gap:10px;padding:8px 0;border-top:1px solid var(--cw-ln);font-size:14px;line-height:1.45}
+.cw-resumo div:first-child{border-top:0}
+.cw-resumo dt{color:var(--cw-fa)}
+.cw-resumo dd{color:var(--cw-ink);overflow-wrap:anywhere}
+
+/* respostas */
+.cw-resp{padding:14px 18px 18px;border-top:1px solid var(--cw-ln);background:#0F121A;max-height:55%;overflow-y:auto}
+.cw-resp-t{font-size:12px;color:var(--cw-fa);margin-bottom:10px}
+.cw-ops{display:flex;flex-wrap:wrap;gap:8px}
+.cw-op{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;background:transparent;color:var(--cw-ink);border:1px solid var(--cw-ln2);border-radius:2px;font-size:14px;text-align:left;text-decoration:none}
+.cw-op:hover{border-color:var(--cw-vs);background:rgba(185,174,247,.06)}
+.cw-op.pri{background:var(--cw-ink);color:var(--cw-bg);border-color:var(--cw-ink);font-weight:500}
+.cw-op.pri:hover{background:#fff}
+.cw-op.full{width:100%;justify-content:space-between}
+.cw-lk{min-height:44px;padding:0 4px;background:none;border:0;color:var(--cw-mu);font-size:13.5px;text-decoration:underline;text-underline-offset:3px}
+.cw-lk:hover{color:var(--cw-ink)}
+.cw-linha{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:6px}
+.cw-campo{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.cw-campo label{font-size:13px;font-weight:500}
+.cw-campo label small{font-weight:400;color:var(--cw-fa);margin-left:6px;font-size:12px}
+.cw-in{min-height:46px;padding:10px 12px;background:var(--cw-bg);border:1px solid var(--cw-ln2);border-radius:2px;font-size:16px;width:100%;box-sizing:border-box}
+.cw-in::placeholder{color:#5D6378}
+.cw-in:focus{border-color:var(--cw-vs);outline:none;box-shadow:0 0 0 3px rgba(185,174,247,.18)}
+.cw textarea.cw-in{min-height:84px;resize:vertical;line-height:1.5}
+.cw-in[aria-invalid="true"]{border-color:#F0A5A9}
+.cw-err{font-size:13px;color:#F4B9BC}
+.cw-nota{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;line-height:1.5;color:var(--cw-fa);margin-top:12px}
+.cw-nota svg{flex:none;margin-top:2px}
+.cw-ok{font-size:13.5px;line-height:1.5;color:var(--cw-ink);background:rgba(185,174,247,.1);border:1px solid rgba(185,174,247,.35);padding:10px 12px;border-radius:2px;margin-bottom:12px}
+.cw-ok a{color:var(--cw-vs);text-underline-offset:3px}
+
+@media (max-width:640px){
+  .cw-lanc{right:16px;bottom:16px;padding:0 12px}
+  .cw-lanc-t{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .cw-lanc.on{display:none}
+  /* Casa Alba tem uma barra de ações fixa embaixo no celular. */
+  body:has(.ca-barra) .cw-lanc{bottom:92px}
+  body:has(.ca-barra) .cw-dica{bottom:160px}
+  .cw-dica{right:16px;left:16px;width:auto;bottom:84px}
+  .cw-painel{left:0;right:0;bottom:0;width:auto;max-width:none;height:88dvh;border-left:0;border-right:0;border-bottom:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .cw-painel,.cw-msg,.cw-resumo,.cw-dica{animation:none}
+  .cw-dig i{animation:none;opacity:.6}
+  .cw-lanc,.cw-lanc.fora{transition:none}
+}

@@ -1,0 +1,89 @@
+body:has(.lu){background:#F4F7F7}
+.lu *,.lu *::before,.lu *::after{box-sizing:border-box}
+.lu{--bg:#F4F7F7;--card:#FFFFFF;--ink:#15303A;--muted:#4F6670;--teal:#2F6F86;--teal-d:#235668;--mint:#DCEBEE;--line:#D5E1E4;position:relative;background:var(--bg);color:var(--ink);font-family:'Hanken Grotesk',Arial,sans-serif;font-size:16px;line-height:1.6}
+:where(.lu) a{color:inherit;text-decoration:none}
+:where(.lu) :where(h1,h2,h3,p){margin:0}
+.lu-wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+
+/* site da clínica */
+.lu-nav{position:sticky;top:56px;z-index:40;background:rgba(244,247,247,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.lu-nav-in{display:flex;align-items:center;justify-content:space-between;height:72px}
+.lu-logo{display:flex;align-items:center;gap:10px;font-family:'Instrument Serif',Georgia,serif;font-size:28px}
+.lu-logo i{width:22px;height:22px;border-radius:50%;border:5px solid var(--teal)}
+.lu-links{display:flex;gap:28px;font-size:15px;color:var(--muted)}
+.lu-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:999px;background:var(--teal);color:#fff;font-weight:600;font-size:15px;border:0;cursor:pointer;font-family:inherit}
+.lu-btn:hover{background:var(--teal-d)}
+.lu-btn.ghost{background:transparent;color:var(--teal);box-shadow:inset 0 0 0 1.5px var(--teal)}
+
+.lu-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center;padding:72px 0 88px}
+.lu-eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);font-weight:600}
+.lu-h1{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(52px,6.4vw,92px);line-height:.98;letter-spacing:-.01em;margin-top:18px}
+.lu-h1 em{color:var(--teal)}
+.lu-lead{font-size:19px;color:var(--muted);max-width:480px;margin-top:22px}
+.lu-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.lu-facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:40px;font-size:14px;color:var(--muted)}
+.lu-facts b{display:block;color:var(--ink);font-size:16px}
+.lu-arch{position:relative;aspect-ratio:4/5;border-radius:999px 999px 24px 24px;background:linear-gradient(180deg,#D7E8EB 0%,#9BC3CC 100%);overflow:hidden}
+.lu-arch::before{content:"";position:absolute;left:50%;top:22%;width:46%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,0) 70%)}
+.lu-arch span{position:absolute;left:20px;bottom:18px;font-size:12px;color:#15303A;background:rgba(255,255,255,.75);padding:4px 10px;border-radius:999px}
+
+.lu-sec{padding:88px 0}
+.lu-sec.white{background:var(--card)}
+.lu-h2{font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(38px,4vw,56px);line-height:1.02}
+.lu-sub{color:var(--muted);max-width:560px;margin-top:14px;font-size:17px}
+.lu-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
+.lu-card{background:var(--bg);border-radius:20px;padding:26px;display:flex;flex-direction:column;gap:10px}
+.lu-card i{width:44px;height:44px;border-radius:14px;background:var(--mint);display:block}
+.lu-card h3{font-size:19px;font-weight:600}
+.lu-card p{color:var(--muted);font-size:15px}
+.lu-card small{color:var(--teal);font-weight:600;font-size:13px;margin-top:auto}
+
+.lu-book{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
+.lu-steps{list-style:none;padding:0;margin:28px 0 0;display:flex;flex-direction:column;gap:14px}
+.lu-steps li{display:flex;gap:14px;align-items:center;font-size:16px}
+.lu-steps b{width:32px;height:32px;border-radius:50%;background:var(--mint);color:var(--teal);display:grid;place-items:center;font-size:14px}
+.lu-cal{background:var(--card);border-radius:24px;padding:28px;box-shadow:0 20px 60px -30px rgba(21,48,58,.35)}
+.lu-cal-h{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.lu-days{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:20px}
+.lu-day{min-height:68px;border-radius:14px;border:1.5px solid var(--line);background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:inherit;color:var(--ink);cursor:pointer;font-size:13px}
+.lu-day b{font-size:20px}
+.lu-day.on{border-color:var(--teal);background:var(--teal);color:#fff}
+.lu-times{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.lu-time{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:inherit;font-size:15px;cursor:pointer}
+.lu-time.on{border-color:var(--teal);color:var(--teal);font-weight:600;background:var(--mint)}
+.lu-cal-foot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+
+.lu-team{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:44px}
+.lu-person{border-radius:20px;overflow:hidden;background:var(--card)}
+.lu-person div{aspect-ratio:4/4.4;background:linear-gradient(170deg,#E3EEF0,#B5D0D6)}
+.lu-person p{padding:16px 18px;font-size:15px}
+.lu-person p b{display:block;font-size:17px}
+
+.lu-visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;margin-top:40px}
+.lu-map{border-radius:24px;min-height:300px;background:repeating-linear-gradient(0deg,transparent 0 38px,#D5E1E4 38px 39px),repeating-linear-gradient(90deg,#EAF1F2 0 38px,#D5E1E4 38px 39px);position:relative}
+.lu-map::after{content:"";position:absolute;left:52%;top:44%;width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--teal)}
+.lu-info{background:var(--card);border-radius:24px;padding:28px;display:flex;flex-direction:column;gap:18px}
+.lu-info dt{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lu-info dd{margin:4px 0 0;font-size:17px}
+.lu-foot{padding:36px 0;font-size:14px;color:var(--muted);border-top:1px solid var(--line)}
+
+.lu-float{position:sticky;bottom:24px;z-index:30;display:flex;justify-content:flex-end;padding:0 32px;pointer-events:none;margin-top:-72px}
+.lu-float a{pointer-events:auto;box-shadow:0 12px 30px -10px rgba(21,48,58,.5)}
+
+
+.lu-btn:focus-visible,.lu-day:focus-visible,.lu-time:focus-visible,.lu a:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.lu-hero-sec{position:relative}
+@media (max-width:900px){
+  .lu-links{display:none}
+  .lu-nav-in .lu-btn{min-height:44px;padding:0 18px;font-size:14px}
+  .lu-hero{grid-template-columns:minmax(0,1fr);padding:40px 0 56px;gap:36px}
+  .lu-arch{max-width:340px;justify-self:center;width:100%}
+  .lu-cards,.lu-team{grid-template-columns:minmax(0,1fr)}
+  .lu-book,.lu-visit{grid-template-columns:minmax(0,1fr)}
+  .lu-days{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+  .lu-sec{padding:64px 0}
+  .lu-float{padding:0 16px}
+}
+@media (min-width:901px) and (max-width:1100px){.lu-cards,.lu-team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lu-btn:disabled{opacity:.5;cursor:not-allowed}
+.lu-btn:disabled:hover{background:var(--teal)}

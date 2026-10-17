@@ -1,0 +1,42 @@
+:root {
+  /* Fontes Geist (pacote local "geist", sem depender do Google Fonts) */
+  --fonte-sans: var(--font-geist-sans);
+  --fonte-mono: var(--font-geist-mono);
+  --roxo-noite: #24173D;
+  --roxo-noite-2: #2E2049;
+  --roxo: #3B2370;
+  --lilas: #B9A3F0;
+  --lilas-escuro: #7A5CC8;
+  --grafite: #23222A;
+  --fundo-terminal: #17121F;
+  --linha-terminal: #2E2540;
+  --borda-terminal: #3A2F4D;
+  --texto-terminal: #CFC8DC;
+  --texto-terminal-2: #8C8299;
+  --texto-terminal-3: #5E5470;
+  --erro-claro: #F0A5A9;
+  --erro-borda: #E0868B;
+  --fundo: #F2F1F4;
+  --linha: #DCDAE2;
+  --texto-2: #5D5B66;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--fonte-sans), system-ui, sans-serif;
+  color: var(--grafite);
+  background: var(--fundo);
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, textarea, select { font: inherit; }
+
+:focus-visible { outline: 2px solid var(--lilas); outline-offset: 3px; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}

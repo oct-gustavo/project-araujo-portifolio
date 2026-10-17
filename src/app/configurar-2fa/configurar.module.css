@@ -1,0 +1,44 @@
+.topo { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.passos { display: flex; gap: 6px; }
+.passoOn, .passoOff { display: block; width: 32px; height: 3px; }
+.passoOn { background: var(--lilas); }
+.passoOff { background: var(--borda-terminal); }
+
+.centro { width: 100%; max-width: 720px; align-self: center; }
+.titulo { margin: 0; font-weight: 500; font-size: 15px; color: #fff; display: flex; gap: 16px; }
+.linhaCarregando { display: flex; align-items: center; gap: 14px; font-size: 14px; }
+
+.qrLinha { display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start; }
+.qrFundo { background: #fff; padding: 14px; line-height: 0; }
+.chave { flex: 1 1 260px; display: flex; flex-direction: column; gap: 14px; font-size: 13px; }
+.segredo { font-family: inherit; font-size: 18px; color: #fff; letter-spacing: .12em; word-break: break-all; }
+.dica { color: var(--texto-terminal-3); line-height: 1.6; }
+
+.fantasma {
+  width: fit-content; background: transparent; border: 1px solid var(--borda-terminal); color: var(--texto-terminal);
+  font-size: 13px; padding: 0 14px; min-height: 40px; border-radius: 0; cursor: pointer;
+  transition: border-color .12s ease, color .12s ease;
+}
+.fantasma:hover { border-color: var(--lilas); color: #fff; }
+
+.direita { display: flex; justify-content: flex-end; }
+.entre { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+.aviso { margin: 0; font-size: 13px; line-height: 1.7; border-left: 2px solid var(--lilas); padding-left: 14px; }
+.aviso strong { color: #fff; font-weight: 500; }
+
+.lista {
+  margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px; background: var(--linha-terminal); border: 1px solid var(--linha-terminal);
+}
+.lista li { background: var(--fundo-terminal); padding: 14px 16px; display: flex; gap: 16px; font-size: 17px; letter-spacing: .14em; color: #fff; }
+.lista li span { color: var(--texto-terminal-3); letter-spacing: 0; font-size: 12px; padding-top: 3px; }
+
+.botoes { display: flex; flex-wrap: wrap; gap: 10px; }
+.final { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 16px; border-top: 1px solid var(--linha-terminal); }
+.confirmo { display: flex; align-items: center; gap: 12px; font-size: 13px; cursor: pointer; }
+.confirmo input { width: 18px; height: 18px; accent-color: var(--lilas); margin: 0; }
+
+@media (max-width: 520px) {
+  .lista { grid-template-columns: minmax(0, 1fr); }
+}
