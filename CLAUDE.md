@@ -45,6 +45,9 @@ prioriza e acompanha o contato. Uso exclusivo dele (um único usuário).
 ## Portfólio público (rota `/`)
 - `/` é o portfólio do estúdio (única página pública e indexável). O painel continua em `/entrar`, `/leads` etc.
 - `proxy.ts`: rotas em `ROTAS_PUBLICAS` recebem só a CSP, sem ler sessão do Supabase. Não colocar páginas do painel ali.
+- Páginas do painel ficam listadas em `ROTAS_PAINEL` no `proxy.ts` (sem sessão completa → `/entrar`).
+  **Ao criar uma página nova do painel, incluir ali.** Qualquer outro endereço, para quem não entrou, recebe a 404
+  (`src/app/not-found.tsx`, estilo do portfólio) por rewrite para uma pasta privada — a página pedida nunca é servida.
 - Código: `src/components/site/` (seções, mockups, formulário, abertura) e `src/lib/portfolio.ts` (dados de contato).
 - CSS em `src/components/site/site.css`, todo preso à classe `.site` (o CSS global do Next persiste entre rotas).
 - Identidade própria, diferente do painel: estúdio criativo, escuro e frio, roxo como destaque; fonte Epilogue

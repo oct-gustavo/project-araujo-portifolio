@@ -10,7 +10,8 @@ import { SUPABASE_CHAVE_PUBLICA, SUPABASE_URL } from '@/lib/env'
  *    - / e /projetos/…   → portfólio público: livre, sem consultar o Supabase (só recebe a CSP)
  *    - /entrar           → livre (quem já entrou por completo vai para /leads)
  *    - /configurar-2fa   → precisa de senha ok e de NÃO ter 2FA confirmado
- *    - o resto           → precisa de senha + 2FA (nível aal2)
+ *    - páginas do painel → precisam de senha + 2FA (nível aal2)
+ *    - qualquer outro endereço, sem sessão completa → página 404 do portfólio (nunca a página em si)
  * As rotas /api fazem a própria verificação.
  */
 /** Páginas abertas a qualquer visitante: o portfólio e as páginas de projeto. */
@@ -18,6 +19,12 @@ const ROTAS_PUBLICAS = new Set(['/'])
 const PREFIXOS_PUBLICOS = ['/projetos/']
 const ehPublica = (caminho: string) =>
   ROTAS_PUBLICAS.has(caminho) || PREFIXOS_PUBLICOS.some((p) => caminho.startsWith(p))
+
+/** Páginas do painel: sem sessão completa, levam ao login. Ao criar uma página nova do painel, inclua aqui. */
+const ROTAS_PAINEL = ['/leads', '/novo-lead', '/resumo', '/configuracoes']
+const ehDoPainel = (caminho: string) => ROTAS_PAINEL.some((r) => caminho === r || caminho.startsWith(`${r}/`))
+/** Pasta privada (começa com "_"): nunca vira rota, então o Next responde com a página 404. */
+const CAMINHO_404 = '/_nao-encontrada'
 
 export async function proxy(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
@@ -93,7 +100,19 @@ export async function proxy(request: NextRequest) {
     else if (completo) destino = '/leads'
     else if (proximoNivel === 'aal2') destino = '/entrar' // já tem 2FA: precisa digitar o código
   } else if (!completo) {
-    destino = '/entrar'
+    if (ehDoPainel(caminho)) destino = '/entrar'
+    else {
+      // Endereço desconhecido para quem não entrou: mostra a 404 sem revelar se a página existe.
+      // (Default-deny continua: a página pedida nunca é servida, só a 404.)
+      const url = request.nextUrl.clone()
+      url.pathname = CAMINHO_404
+      url.search = ''
+      const nao = NextResponse.rewrite(url, { request: { headers: cabecalhos } })
+      resposta.cookies.getAll().forEach((c) => nao.cookies.set(c))
+      nao.headers.set('Content-Security-Policy', csp)
+      Object.entries(cabecalhosSemCache).forEach(([k, v]) => nao.headers.set(k, v))
+      return nao
+    }
   }
 
   if (destino) {

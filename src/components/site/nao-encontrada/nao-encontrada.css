@@ -1,0 +1,36 @@
+/* Página 404 (src/app/not-found.tsx). Tudo preso à classe .nf. */
+.nf{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.nf-main{flex:1;display:flex;align-items:center;position:relative;overflow:hidden}
+.nf-bg{position:absolute;inset:0;background:radial-gradient(50% 70% at 78% 55%,rgba(84,62,180,.26),transparent 70%);pointer-events:none}
+.nf .nf-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px);align-items:center;padding-block:clamp(48px,7vw,96px);width:100%}
+.nf-cod{display:inline-flex;align-items:center;gap:14px;margin:0;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--violet-soft);font-weight:500}
+.nf-cod::before{content:"";width:28px;height:1px;background:currentColor}
+.nf .nf-t{margin:22px 0 0;font-size:clamp(44px,6.2vw,88px);line-height:1;letter-spacing:-.045em;font-weight:600}
+.nf .nf-t em{font-style:italic;color:var(--violet-soft)}
+.nf .nf-p{margin:24px 0 0;max-width:520px;font-size:18px;line-height:1.65;color:var(--muted)}
+.nf-p code{font-family:inherit;color:var(--ink);background:rgba(206,212,236,.07);border:1px solid var(--line);padding:2px 8px;border-radius:2px;font-size:15px;overflow-wrap:anywhere}
+.nf-acoes{display:flex;flex-wrap:wrap;align-items:center;gap:16px 28px;margin-top:36px}
+.nf-lista{margin-top:56px;border-top:1px solid var(--line);max-width:560px}
+.nf .nf-lista h2{margin:18px 0 6px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:500}
+.nf-lista ul{list-style:none;margin:0;padding:0}
+.nf .nf-lista a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;min-height:44px;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink)}
+.nf-lista a span{font-size:17px;font-weight:500}
+.nf-lista a small{font-size:13.5px;color:var(--faint);text-align:right}
+.nf-lista a:hover span{color:var(--violet-soft)}
+.nf-lista a:focus-visible{outline:2px solid var(--violet-soft);outline-offset:4px}
+/* o "A" desmontado */
+.nf-arte{position:relative;aspect-ratio:1;max-width:460px;justify-self:center;width:100%}
+.nf-arte svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.nf-perna{fill:none;stroke:#ECEDF4;stroke-width:1.2}
+.nf-barra{fill:#ECEDF4;transform-origin:50% 50%;transform-box:fill-box;transform:translate(18px,60px) rotate(-12deg);animation:nfFlutua 6s ease-in-out infinite}
+.nf-cursor{fill:#9483F2;animation:nfPisca 1.2s steps(1) infinite}
+.nf-guia{stroke:rgba(206,212,236,.16);stroke-dasharray:4 6}
+@keyframes nfFlutua{0%,100%{transform:translate(18px,64px) rotate(-14deg)}50%{transform:translate(18px,56px) rotate(-10deg)}}
+@keyframes nfPisca{0%,60%{opacity:1}61%,100%{opacity:.15}}
+@media (max-width:900px){
+  .nf .nf-grid{grid-template-columns:1fr}
+  .nf-arte{order:-1;max-width:200px;justify-self:start}
+  .nf .nf-p{font-size:16px}
+}
+@media (max-width:480px){.nf-lista a{flex-direction:column;gap:2px}.nf-lista a small{text-align:left}}
+@media (prefers-reduced-motion:reduce){.nf-barra,.nf-cursor{animation:none}}
