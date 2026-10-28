@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { caminhoProjeto } from '@/lib/projetos'
 import { SimboloA } from '@/components/marca/Logo'
@@ -136,15 +137,13 @@ export function Sobre() {
           <div className="about-media rv">
             <div className="portrait-wrap">
               <div className="portrait">
-                {/* Troque por <Image src="/gustavo.jpg" ... fill /> quando tiver a foto */}
-                <svg className="portrait-sil" viewBox="0 0 200 220" aria-hidden="true">
-                  <circle cx="100" cy="72" r="44" fill="currentColor" />
-                  <path d="M8 220 C18 152 60 130 100 130 C140 130 182 152 192 220 Z" fill="currentColor" />
-                </svg>
-                <div className="portrait-ph">
-                  <span>[Sua foto]</span>
-                  <span>Retrato em luz fria</span>
-                </div>
+                <Image
+                  className="portrait-img"
+                  src="/fotos/gustavo.jpg"
+                  alt={`Retrato de ${PORTFOLIO.nome}`}
+                  fill
+                  sizes="(max-width: 900px) 100vw, 460px"
+                />
               </div>
             </div>
           </div>
