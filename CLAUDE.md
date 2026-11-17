@@ -42,36 +42,39 @@ prioriza e acompanha o contato. Uso exclusivo dele (um único usuário).
 - Login em estilo terminal com a entrada "logo que voa". Animações leves; respeitar `prefers-reduced-motion`.
 - Mockups de referência no canvas do Claude Design ("Captação de Clientes — Mockups").
 
-## Portfólio público (rota `/`)
-- `/` é o portfólio do estúdio (única página pública e indexável). O painel continua em `/entrar`, `/leads` etc.
-- `proxy.ts`: rotas em `ROTAS_PUBLICAS` recebem só a CSP, sem ler sessão do Supabase. Não colocar páginas do painel ali.
+## Página pública de orçamento (rota `/`)
+- `/` é uma página única de pedido de orçamento (única página pública e indexável). O painel continua em `/entrar`, `/leads` etc.
+  Não há páginas de projeto: os projetos reais aparecem em vídeos no TikTok e no Instagram. Não exibir nome, endereço
+  ou dado real de clientes no site.
+- `proxy.ts`: `/` (em `ROTAS_PUBLICAS`) e `/experimentos/` (em `PREFIXOS_PUBLICOS`) recebem só a CSP, sem ler sessão do
+  Supabase. Não colocar páginas do painel ali.
 - Páginas do painel ficam listadas em `ROTAS_PAINEL` no `proxy.ts` (sem sessão completa → `/entrar`).
   **Ao criar uma página nova do painel, incluir ali.** Qualquer outro endereço, para quem não entrou, recebe a 404
-  (`src/app/not-found.tsx`, estilo do portfólio) por rewrite para uma pasta privada — a página pedida nunca é servida.
-- Código: `src/components/site/` (seções, mockups, formulário, abertura) e `src/lib/portfolio.ts` (dados de contato).
-- CSS em `src/components/site/site.css`, todo preso à classe `.site` (o CSS global do Next persiste entre rotas).
-- Identidade própria, diferente do painel: estúdio criativo, escuro e frio, roxo como destaque; fonte Epilogue
-  (`@fontsource-variable/epilogue`, local). Sem estética de terminal/código/startup e sem neon.
-  Os mockups dos projetos usam Instrument Serif e Hanken Grotesk (só dentro deles).
-- Abertura: mesma ideia da entrada do login (peças do A se encaixam, scanner preenche, símbolo voa até o menu), em CSS puro.
-- Formulário de contato (3 passos numerados) não grava nada: monta a mensagem e abre o WhatsApp (`wa.me`).
-  Rótulos sempre visíveis, coluna única, telefone com máscara (só números), validação ao sair do campo,
-  resumo de erros com foco no primeiro campo errado, limite de 3 envios em 10 min (espera de 5 min, no navegador).
-  Links para `#contato` levam ao formulário com o campo "Seu nome" já selecionado.
-- Assistente de conversa (`src/components/site/AssistenteConversa.tsx` + `assistente.css`, preso à classe `.cw`):
-  balão no canto, 4 perguntas com botões (tipo, prazo, nome/empresa, ideia opcional) e entrega no WhatsApp (`wa.me`)
-  com resumo. Roteiro fixo no navegador, sem servidor e sem IA. Progresso guardado só durante a visita (sessionStorage).
-  Divide com o formulário o limite de envios (`src/lib/limiteEnvios.ts`). Na `/` some enquanto o formulário está na tela;
-  nas páginas de conceito fica escondido enquanto o tour está aberto. Esc fecha e devolve o foco ao balão.
-- Mockups de referência no canvas do Claude Design ("Portfólio Araújo").
-- Páginas de projeto em `/projetos/[slug]` (lista em `src/lib/projetos.ts`, também públicas no `proxy.ts`):
-  - `patricia-rezende`: case real (`src/components/projetos/caso/`). Só fatos do projeto; ano, link e depoimento
-    aparecem quando preenchidos (sem placeholder público).
-  - `clinica-lumen`, `atelie-norte`, `casa-alba`: conceitos só visuais (sem servidor, nada é enviado), cada um com
-    identidade própria e o tour guiado `TourConceito` (abre em toda visita; Esc fecha, ← → navegam, "Refazer o tour").
-  - `/projetos/<conceito>/detalhes`: ficha de cada conceito no estilo do case (ideia, decisões de design, cores,
-    fontes e estilo). Textos e cores em `src/components/projetos/detalhes/fichas.ts`; layout em `Detalhes.tsx` +
-    `detalhes.css` (preso à classe `.fd`). O último passo do tour e a faixa final do conceito levam para ela.
+  (`src/app/not-found.tsx`, mesmo estilo da página) por rewrite para uma pasta privada — a página pedida nunca é servida.
+- Seções, nesta ordem: cabeçalho (logo, âncoras "Experimentos" e "Como funciona", botão "Pedir orçamento"), início,
+  experimentos (3 conceitos com miniaturas só em divs/CSS, `aria-hidden`, etiqueta "Conceito, dados fictícios"),
+  como funciona (4 passos), orçamento (formulário) e rodapé (Instagram). Sem prazo nem preço em lugar nenhum.
+- Código em `src/components/site/`: `PaginaUnica.tsx` (seções), `Experimentos.tsx` (miniaturas),
+  `FormularioOrcamento.tsx`, `Abertura.tsx`, `fontes.ts`. Dados de contato em `src/lib/portfolio.ts`.
+- CSS em `src/components/site/pagina-unica.css`, todo preso à classe `.pu` (o CSS global do Next persiste entre rotas).
+- Identidade própria, diferente do painel: estúdio criativo para donos de negócio não técnicos. Tema escuro único:
+  fundo `#13111C`, painéis `#1C1A26`/`#242232`, linhas `#34314A`, texto `#EEEAF7`, texto secundário `#AAA5BE`,
+  destaque `#9A80F5` (texto sobre o roxo: `#13111C`). Cantos de 3–4px. Sem neon, brilho, gradiente, sombra decorativa
+  nem estética de terminal/código/startup. Fonte Epilogue (400/500/600 + itálico) via `next/font/google`;
+  JetBrains Mono 500 só no logotipo "araújo_" (o "_" é roxo). Largura máxima 1200px, margem lateral mínima de 16px.
+- Logo do site: A maciço com traço roxo embaixo (`SimboloSite` e `ICONE_SITE_SVG` em `src/components/marca/Logo.tsx`).
+  O favicon novo vale só para `/` (data URI em `metadata.icons`); o painel continua com `src/app/icon.svg` e `SimboloA`.
+- Abertura (~1,4 s, CSS puro): as duas metades do A e o traço se encaixam, o scanner preenche e o símbolo voa até o
+  cabeçalho. Com `prefers-reduced-motion` não aparece. Fora isso, só transição de borda no hover dos cartões.
+- Formulário não grava nada nem chama servidor: nome, tipo de negócio (select) e "O que você precisa?". O botão é um
+  link `wa.me` (`target="_blank" rel="noopener"`) atualizado a cada tecla, com a mensagem
+  "Olá! Meu nome é {nome}. Tenho {tipo} e gostaria de um orçamento de site. {texto}" (sem nome: começa só com "Olá!").
+- Sites experimentais em `/experimentos/imobiliaria`, `/barbearia` e `/restaurante` (lista em `src/lib/experimentos.ts`):
+  os cartões da home abrem cada um em nova aba. Código em `src/components/experimentos/` (um componente por site,
+  `Comum.tsx` com a faixa "Experimento do araújo_" e a janela de aviso, `experimentos.css` preso à classe `.ex`).
+  Cada site tem paleta e fontes próprias (`next/font/google`: Hanken Grotesk + Instrument Serif / Oswald / Fraunces).
+  Tudo fictício e só no navegador: busca, agendamento e pedido funcionam, mas o botão de WhatsApp só mostra a mensagem
+  que seria enviada (nada é mandado). Páginas com `noindex`. Endereços sempre "Rua Exemplo".
 
 ## Ordem de construção
 1. Login com 2FA ✔

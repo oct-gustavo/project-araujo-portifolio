@@ -7,16 +7,16 @@ import { SUPABASE_CHAVE_PUBLICA, SUPABASE_URL } from '@/lib/env'
  * 1. gera um nonce novo e aplica a Content-Security-Policy;
  * 2. renova a sessão do Supabase (cookies);
  * 3. decide quem pode ver o quê:
- *    - / e /projetos/…   → portfólio público: livre, sem consultar o Supabase (só recebe a CSP)
+ *    - / e /experimentos/… → página de orçamento e sites experimentais: livres, sem consultar o Supabase (só CSP)
  *    - /entrar           → livre (quem já entrou por completo vai para /leads)
  *    - /configurar-2fa   → precisa de senha ok e de NÃO ter 2FA confirmado
  *    - páginas do painel → precisam de senha + 2FA (nível aal2)
  *    - qualquer outro endereço, sem sessão completa → página 404 do portfólio (nunca a página em si)
  * As rotas /api fazem a própria verificação.
  */
-/** Páginas abertas a qualquer visitante: o portfólio e as páginas de projeto. */
+/** Páginas abertas a qualquer visitante: a página de orçamento e os sites experimentais. */
 const ROTAS_PUBLICAS = new Set(['/'])
-const PREFIXOS_PUBLICOS = ['/projetos/']
+const PREFIXOS_PUBLICOS = ['/experimentos/']
 const ehPublica = (caminho: string) =>
   ROTAS_PUBLICAS.has(caminho) || PREFIXOS_PUBLICOS.some((p) => caminho.startsWith(p))
 
@@ -52,7 +52,7 @@ export async function proxy(request: NextRequest) {
   cabecalhos.set('x-nonce', nonce)
   cabecalhos.set('Content-Security-Policy', csp)
 
-  // Portfólio e projetos: não lê nem renova sessão (visitantes não têm cookies do painel).
+  // Página pública: não lê nem renova sessão (visitantes não têm cookies do painel).
   if (ehPublica(request.nextUrl.pathname)) {
     const publica = NextResponse.next({ request: { headers: cabecalhos } })
     publica.headers.set('Content-Security-Policy', csp)
@@ -130,5 +130,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|fotos/|favicon.ico|icon.svg|robots.txt).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|icon.svg|robots.txt).*)'],
 }

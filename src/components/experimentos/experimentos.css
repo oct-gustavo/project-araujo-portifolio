@@ -1,0 +1,198 @@
+/*
+ * Sites experimentais (/experimentos/...). Tudo preso à classe .ex; cada site define a própria paleta
+ * (.ex-imob, .ex-barb, .ex-rest). O CSS global do Next persiste entre rotas: nada aqui afeta o painel.
+ */
+html:has(.ex){scroll-behavior:smooth}
+html:has(.ex-imob),body:has(.ex-imob){background:#F4F1EA}
+html:has(.ex-barb),body:has(.ex-barb){background:#1A1714}
+html:has(.ex-rest),body:has(.ex-rest){background:#F6EFE3}
+@media (prefers-reduced-motion:reduce){html:has(.ex){scroll-behavior:auto}}
+
+.ex{
+  --gut:24px;
+  min-height:100vh;background:var(--fundo);color:var(--texto);
+  font-family:var(--ex-corpo),system-ui,sans-serif;font-size:16px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+@media (max-width:600px){.ex{--gut:16px}}
+.ex *,.ex *::before,.ex *::after{box-sizing:border-box}
+.ex h1,.ex h2,.ex h3,.ex p,.ex ul,.ex ol,.ex blockquote,.ex fieldset{margin:0}
+.ex ul,.ex ol{padding:0;list-style:none}
+.ex fieldset{border:0;padding:0;min-width:0}
+.ex a{color:inherit}
+.ex :focus-visible{outline:2px solid var(--foco);outline-offset:3px}
+.ex [id]{scroll-margin-top:16px}
+.ex-wrap{width:100%;max-width:1160px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut)}
+.ex-titulo{font-family:var(--ex-titulo),Georgia,serif;font-weight:var(--peso-titulo,400);line-height:1.08;letter-spacing:var(--esp-titulo,-.01em)}
+
+/* ---------- faixa do experimento (igual nos três) ---------- */
+.ex-faixa{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:4px 16px;padding:8px var(--gut);background:#13111C;color:#EEEAF7;font-size:13px;line-height:1.4}
+.ex-faixa-marca{font-weight:600}
+.ex-faixa a{color:#B9A3F0;font-weight:600;text-decoration:none;padding:6px 0}
+.ex-faixa a:hover{text-decoration:underline}
+.ex-faixa a:focus-visible{outline-color:#C4B5FF}
+@media (max-width:480px){.ex-faixa-sep{display:none}.ex-faixa-aviso{display:block}}
+
+/* ---------- cabeçalho ---------- */
+.ex-cab{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 24px;padding-top:16px;padding-bottom:16px}
+.ex-logo{font-family:var(--ex-titulo),Georgia,serif;font-size:24px;line-height:1.1;text-decoration:none}
+.ex-menu{display:flex;flex-wrap:wrap;gap:4px 20px;font-size:15px}
+.ex-menu a{color:var(--suave);text-decoration:none;padding:8px 0}
+.ex-menu a:hover{color:var(--texto)}
+
+/* ---------- botões e campos ---------- */
+.ex-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border:1px solid var(--destaque);border-radius:2px;background:var(--destaque);color:var(--sobre-destaque);font:inherit;font-weight:600;font-size:15px;line-height:1.2;text-decoration:none;cursor:pointer;transition:filter .2s ease}
+.ex-btn:hover{filter:brightness(1.07)}
+.ex-btn-linha{background:transparent;color:var(--texto);border-color:var(--linha-forte)}
+.ex-btn-linha:hover{filter:none;border-color:var(--texto)}
+.ex-campo{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ex-campo label,.ex-legenda{font-size:13px;font-weight:600}
+.ex-campo select,.ex-campo input{width:100%;min-height:46px;padding:10px 12px;font:inherit;font-size:16px;color:var(--texto-campo,var(--texto));background:var(--fundo-campo,var(--cartao));border:1px solid var(--linha-forte);border-radius:2px}
+.ex-erro{font-size:14px;color:var(--erro);font-weight:500}
+.ex-vivo{font-size:15px;color:var(--suave)}
+
+/* ---------- seções ---------- */
+.ex-secao{padding-top:72px;padding-bottom:72px;display:flex;flex-direction:column;gap:32px}
+.ex-secao-cab{display:flex;flex-direction:column;gap:10px;max-width:60ch}
+.ex-h2{font-size:clamp(30px,4vw,44px)}
+.ex-texto{color:var(--suave);font-size:17px}
+.ex-rodape{padding-top:28px;padding-bottom:40px;border-top:1px solid var(--linha);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:14px;color:var(--suave)}
+@media (max-width:600px){.ex-secao{padding-top:48px;padding-bottom:48px;gap:24px}}
+
+/* ---------- janela "isto é um experimento" ---------- */
+.ex-aviso{width:min(460px,calc(100% - 32px));padding:0;border:1px solid #34314A;border-radius:4px;background:#1C1A26;color:#EEEAF7;font-family:var(--ex-corpo),system-ui,sans-serif}
+.ex-aviso::backdrop{background:rgba(10,9,15,.6)}
+.ex-aviso-in{display:flex;flex-direction:column;gap:14px;padding:24px}
+.ex-aviso h2{font-size:22px;font-weight:600;line-height:1.2}
+.ex-aviso p{color:#AAA5BE;font-size:15px;line-height:1.55}
+.ex-aviso blockquote{padding:12px 14px;background:#13111C;border-left:3px solid #9A80F5;font-size:15px;line-height:1.5;overflow-wrap:anywhere}
+.ex-aviso-acoes{display:flex;flex-wrap:wrap;gap:10px;padding-top:4px}
+.ex-aviso-acoes>*{flex:1 1 160px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:3px;font:inherit;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer}
+.ex-aviso-orc{background:#9A80F5;color:#13111C;border:1px solid #9A80F5}
+.ex-aviso button{background:transparent;color:#EEEAF7;border:1px solid #34314A}
+.ex-aviso button:hover{border-color:#6A5BB0}
+.ex-aviso :focus-visible{outline:2px solid #C4B5FF;outline-offset:3px}
+
+/* =================== Casa Exemplo (imobiliária) =================== */
+.ex-imob{--fundo:#F4F1EA;--cartao:#FFFFFF;--texto:#1B2433;--suave:#545E6F;--linha:#DAD4C6;--linha-forte:#B9B2A2;--destaque:#C9A24B;--sobre-destaque:#1B2433;--marinho:#1F3A5F;--preco:#7A5C14;--foco:#1F3A5F;--erro:#9B2C2C}
+.ex-imob .ex-cab{border-bottom:1px solid var(--linha)}
+.imob-hero{background:var(--marinho);color:#F4F1EA}
+.imob-hero-in{padding-top:56px;padding-bottom:48px;display:flex;flex-direction:column;gap:24px}
+.imob-hero h1{font-size:clamp(40px,6vw,68px);max-width:16ch}
+.imob-hero h1 em{color:#E3C77F}
+.imob-hero p{color:#D6DCE6;font-size:18px;max-width:52ch}
+.imob-busca{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) auto;gap:12px;align-items:end;padding:16px;background:#F4F1EA;color:#1B2433;border-radius:2px}
+.imob-busca .ex-btn{min-width:120px}
+.ex .imob-finalidade{grid-column:1/-1;display:flex;width:max-content;max-width:100%;border:1px solid var(--marinho);border-radius:2px}
+.imob-finalidade label{position:relative;display:flex}
+.imob-finalidade input{position:absolute;inset:0;margin:0;opacity:0;cursor:pointer}
+.imob-finalidade span{display:inline-flex;align-items:center;min-height:42px;padding:8px 22px;font-weight:600;font-size:15px;color:var(--marinho)}
+.imob-finalidade input:hover+span{background:#E7E2D6}
+.imob-finalidade input:checked+span{background:var(--marinho);color:#F4F1EA}
+.imob-finalidade input:focus-visible+span{outline:2px solid var(--marinho);outline-offset:3px}
+@media (max-width:760px){.imob-busca{grid-template-columns:1fr 1fr}.imob-busca .ex-btn{grid-column:1/-1}}
+@media (max-width:420px){.imob-busca{grid-template-columns:1fr}}
+.imob-lista-cab{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px}
+.imob-lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:20px}
+.imob-card{display:flex;flex-direction:column;background:var(--cartao);border:1px solid var(--linha);border-radius:2px;transition:border-color .2s ease}
+.imob-card:hover{border-color:var(--linha-forte)}
+.imob-foto{position:relative;height:150px}
+.imob-foto span{position:absolute;left:10px;top:10px;padding:4px 8px;background:#F4F1EA;color:#1B2433;font-size:12px;font-weight:600;border-radius:2px}
+.imob-card-txt{display:flex;flex-direction:column;gap:4px;padding:14px 16px 16px;flex:1}
+.imob-card h3{font-size:17px;font-weight:600;line-height:1.3}
+.imob-dados{color:var(--suave);font-size:14px}
+.imob-local{font-size:15px;font-weight:500}
+.imob-preco{color:var(--preco);font-weight:600;font-size:18px;margin-top:4px}
+.imob-card .ex-btn{margin-top:12px;align-self:flex-start}
+.imob-vazio{padding:32px;border:1px dashed var(--linha-forte);display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.imob-ficha{width:min(560px,calc(100% - 32px));padding:0;border:1px solid var(--linha);border-radius:2px;background:#F4F1EA;color:#1B2433;font-family:var(--ex-corpo),system-ui,sans-serif}
+.imob-ficha::backdrop{background:rgba(15,22,34,.55)}
+.imob-ficha-foto{height:180px}
+.imob-ficha-in{display:flex;flex-direction:column;gap:14px;padding:20px 24px 24px}
+.imob-ficha h2{font-family:var(--ex-titulo),Georgia,serif;font-weight:400;font-size:30px;line-height:1.1}
+.imob-ficha dl{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin:0}
+.imob-ficha dl div{padding:10px;border:1px solid var(--linha);background:#fff}
+.imob-ficha dt{font-size:12px;color:var(--suave)}
+.imob-ficha dd{margin:0;font-weight:600}
+.imob-ficha-acoes{display:flex;flex-wrap:wrap;gap:10px}
+.imob-ficha-acoes>*{flex:1 1 180px}
+.imob-ficha :focus-visible{outline:2px solid #1F3A5F;outline-offset:3px}
+.imob-sobre{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px}
+.imob-sobre li{padding-top:16px;border-top:2px solid var(--destaque);display:flex;flex-direction:column;gap:6px}
+.imob-sobre h3{font-size:18px;font-weight:600}
+.imob-sobre p{color:var(--suave)}
+.imob-contato{background:var(--marinho);color:#F4F1EA}
+.imob-contato .ex-secao{flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.imob-contato p{color:#D6DCE6}
+.imob-contato :focus-visible{outline-color:#E3C77F}
+
+/* =================== Barbearia Exemplo =================== */
+.ex-barb{--fundo:#1A1714;--cartao:#231F1B;--texto:#F1E8DA;--suave:#B3A693;--linha:#3A322B;--linha-forte:#5A4E43;--destaque:#C58A5B;--sobre-destaque:#1A1714;--foco:#E2B48C;--erro:#F0A58C;--peso-titulo:600;--esp-titulo:.01em}
+.ex-barb .ex-logo{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:20px}
+.ex-barb .ex-cab{border-bottom:1px solid var(--linha)}
+.barb-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start;padding-top:64px;padding-bottom:72px}
+@media (max-width:860px){.barb-hero{grid-template-columns:1fr;gap:40px;padding-top:40px;padding-bottom:48px}}
+.barb-hero-txt{display:flex;flex-direction:column;gap:22px}
+.barb-hero h1{font-size:clamp(44px,7vw,80px);text-transform:uppercase;line-height:1}
+.barb-hero h1 em{display:block;color:var(--destaque);font-style:normal}
+.barb-hero p{color:var(--suave);font-size:18px;max-width:44ch}
+.barb-servicos li{display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.barb-servicos li:first-child{border-top:1px solid var(--linha)}
+.barb-servicos b{font-weight:600;font-size:17px}
+.barb-servicos small{grid-column:1;color:var(--suave);font-size:14px}
+.barb-servicos span{grid-row:1/3;grid-column:2;align-self:center;color:var(--destaque);font-weight:600;font-size:18px}
+.barb-agenda{display:flex;flex-direction:column;gap:20px;padding:24px;background:var(--cartao);border:1px solid var(--linha);border-radius:2px}
+.barb-agenda h2{font-family:var(--ex-titulo),sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:26px;line-height:1.1}
+.barb-opcoes{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.barb-opcao{position:relative}
+.barb-opcao input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.barb-opcao span{display:inline-flex;align-items:center;min-height:44px;padding:8px 14px;border:1px solid var(--linha-forte);border-radius:2px;font-size:15px;transition:border-color .2s ease}
+.barb-opcao input:hover+span{border-color:var(--suave)}
+.barb-opcao input:checked+span{background:var(--destaque);border-color:var(--destaque);color:var(--sobre-destaque);font-weight:600}
+.barb-opcao input:focus-visible+span{outline:2px solid var(--foco);outline-offset:3px}
+.barb-opcao input:disabled{cursor:not-allowed}
+.barb-opcao input:disabled+span{color:#7D7062;border-style:dashed;text-decoration:line-through}
+.barb-resumo{font-size:15px;color:var(--suave)}
+.barb-resumo b{color:var(--texto);font-weight:600}
+.barb-onde{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px}
+.barb-onde li{padding:20px;border:1px solid var(--linha);display:flex;flex-direction:column;gap:6px}
+.barb-onde h3{font-family:var(--ex-titulo),sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:16px;color:var(--destaque)}
+.barb-onde p{color:var(--suave)}
+
+/* =================== Cantina Exemplo (restaurante) =================== */
+.ex-rest{--fundo:#F6EFE3;--cartao:#FFFFFF;--texto:#26382C;--suave:#56635A;--linha:#DDD2BE;--linha-forte:#B7AE9A;--destaque:#3E6B4B;--sobre-destaque:#F6EFE3;--foco:#3E6B4B;--erro:#9B2C2C;--peso-titulo:600;--esp-titulo:-.02em}
+.ex-rest .ex-logo{font-weight:600}
+.ex-rest .ex-cab{border-bottom:1px solid var(--linha)}
+.rest-hero{padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:16px}
+.rest-hero h1{font-size:clamp(40px,6vw,68px);max-width:18ch}
+.rest-hero h1 em{color:var(--destaque)}
+.rest-hero p{color:var(--suave);font-size:18px;max-width:52ch}
+.rest-corpo{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:start;padding-top:32px;padding-bottom:72px}
+@media (max-width:860px){.rest-corpo{grid-template-columns:1fr;gap:32px;padding-bottom:48px}}
+.rest-cats{display:flex;flex-wrap:wrap;gap:8px}
+.rest-cats button{min-height:44px;padding:8px 16px;border:1px solid var(--linha-forte);border-radius:2px;background:transparent;color:var(--texto);font:inherit;font-size:15px;cursor:pointer}
+.rest-cats button:hover{border-color:var(--texto)}
+.rest-cats button[aria-pressed="true"]{background:var(--destaque);border-color:var(--destaque);color:var(--sobre-destaque);font-weight:600}
+.rest-menu{display:flex;flex-direction:column;gap:24px;margin-top:24px}
+.rest-menu h2{font-size:26px}
+.rest-itens li{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--linha)}
+.rest-foto{width:64px;height:56px;flex:none;border-radius:2px}
+.rest-item-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.rest-item-txt b{font-weight:600}
+.rest-item-txt small{color:var(--suave);font-size:14px}
+.rest-preco{font-weight:600;white-space:nowrap}
+.rest-qtd{display:flex;align-items:center;gap:6px}
+.rest-qtd button{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--destaque);border-radius:2px;background:transparent;color:var(--destaque);font:inherit;font-size:20px;line-height:1;cursor:pointer}
+.rest-qtd button:hover{background:var(--destaque);color:var(--sobre-destaque)}
+.rest-qtd output{min-width:20px;text-align:center;font-weight:600}
+@media (max-width:480px){.rest-itens li{gap:10px}.rest-foto{width:48px;height:44px}.rest-qtd{gap:4px}.rest-qtd button{width:36px;height:36px}}
+.rest-pedido{position:sticky;top:16px;display:flex;flex-direction:column;gap:14px;padding:20px;background:var(--cartao);border:1px solid var(--linha);border-radius:2px}
+.rest-pedido h2{font-size:24px}
+.rest-pedido-lista li{display:flex;justify-content:space-between;gap:12px;padding:6px 0;color:var(--suave);font-size:15px}
+.rest-total{display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--linha);font-weight:600;font-size:17px}
+.rest-vazio{color:var(--suave);font-size:15px}
+.rest-entrega{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:15px}
+.rest-entrega label{display:inline-flex;align-items:center;gap:8px;min-height:36px;cursor:pointer}
+.rest-entrega input{width:18px;height:18px;accent-color:var(--destaque)}
+
+@media (prefers-reduced-motion:reduce){.ex-btn,.imob-card,.barb-opcao span{transition:none}}

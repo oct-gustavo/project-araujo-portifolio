@@ -1,24 +1,37 @@
+import { CAMINHO_A_SITE } from '@/components/marca/Logo'
+
 /**
- * Abertura do portfólio, na mesma linha da entrada do painel ("logo que voa"):
- * as peças do A se encaixam no centro, o scanner sobe preenchendo e o símbolo voa até o menu.
- * Só CSS (funciona sem JavaScript e respeita a CSP). Com "reduzir movimento" ela não aparece.
+ * Abertura do site, na mesma linha da entrada do painel ("logo que voa"):
+ * as duas metades do A e o traço roxo se encaixam, o scanner preenche e o símbolo voa até o cabeçalho.
+ * Só CSS (funciona sem JavaScript e respeita a CSP), dura ~1,4 s e a página já está carregada por baixo.
+ * Com "reduzir movimento" ela não aparece.
  */
 export function Abertura() {
   return (
-    <div className="intro" aria-hidden="true">
-      <span className="intro-logo">
-        <svg viewBox="0 0 100 100">
-          <polygon className="peca pE" points="6,92 40,26 40,51 19,92" fill="none" stroke="#CFC8DC" strokeWidth="2.2" />
-          <polygon className="peca pD" points="40,26 74,92 61,92 40,51" fill="none" stroke="#CFC8DC" strokeWidth="2.2" />
-          <rect className="peca pB" x="26" y="69" width="28" height="9" fill="none" stroke="#CFC8DC" strokeWidth="2.2" />
-          <rect className="peca pC" x="78" y="83" width="18" height="9" fill="none" stroke="#B9A3F0" strokeWidth="2.2" />
+    <div className="pu-intro" aria-hidden="true">
+      <span className="pu-intro-logo">
+        <svg viewBox="26 26 148 148">
+          <polygon
+            className="pu-peca pu-pE"
+            points="100,28 100,70 92,100 100,100 100,124 84,124 74,150 48,150"
+            fill="none"
+            stroke="#AAA5BE"
+            strokeWidth="3"
+          />
+          <polygon
+            className="pu-peca pu-pD"
+            points="100,28 152,150 126,150 116,124 100,124 100,100 108,100 100,70"
+            fill="none"
+            stroke="#AAA5BE"
+            strokeWidth="3"
+          />
+          <rect className="pu-peca pu-pB" x="58" y="162" width="84" height="9" fill="none" stroke="#9A80F5" strokeWidth="3" />
         </svg>
-        <svg className="intro-cheio" viewBox="0 0 100 100">
-          <path d="M6 92 L40 26 L74 92 L61 92 L40 51 L19 92 Z" fill="#ECEDF4" stroke="#ECEDF4" strokeWidth="2.2" />
-          <rect x="26" y="69" width="28" height="9" fill="#ECEDF4" stroke="#ECEDF4" strokeWidth="2.2" />
-          <rect x="78" y="83" width="18" height="9" fill="#B9A3F0" stroke="#B9A3F0" strokeWidth="2.2" />
+        <svg className="pu-intro-cheio" viewBox="26 26 148 148">
+          <path fillRule="evenodd" fill="#EEEAF7" d={CAMINHO_A_SITE} />
+          <rect x="58" y="162" width="84" height="9" fill="#9A80F5" />
         </svg>
-        <span className="intro-scanner" />
+        <span className="pu-intro-scanner" />
       </span>
     </div>
   )

@@ -17,6 +17,27 @@ export function SimboloA({ tamanho = 26, corA = '#FFFFFF', corCursor = '#B9A3F0'
   )
 }
 
+/* ---------- Marca do site público ("/"): A maciço com traço roxo embaixo ---------- */
+
+/** Contorno do A (com o furo do meio) no quadro 0 0 200 200. */
+export const CAMINHO_A_SITE = 'M100 28L152 150L126 150L116 124L84 124L74 150L48 150ZM100 70L108 100L92 100Z'
+
+/** Ícone do site (favicon): o A sobre fundo grafite. */
+export const ICONE_SITE_SVG =
+  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#24222D"/>' +
+  `<path fill-rule="evenodd" fill="#EEEAF7" d="${CAMINHO_A_SITE}"/>` +
+  '<rect x="58" y="162" width="84" height="9" fill="#9A80F5"/></svg>'
+
+/** Símbolo do site sem fundo, para o cabeçalho. O painel continua usando o SimboloA. */
+export function SimboloSite({ tamanho = 32, className }: { tamanho?: number; className?: string }) {
+  return (
+    <svg className={className} width={tamanho} height={tamanho} viewBox="26 26 148 148" aria-hidden="true" focusable="false">
+      <path fillRule="evenodd" fill="#EEEAF7" d={CAMINHO_A_SITE} />
+      <rect x="58" y="162" width="84" height="9" fill="#9A80F5" />
+    </svg>
+  )
+}
+
 export function Logo({ tamanho = 26, comNome = true, corA = '#FFFFFF', corCursor = '#B9A3F0', className }: Props) {
   return (
     <span className={className} style={{ display: 'inline-flex', alignItems: 'center', gap: 12 }}>
