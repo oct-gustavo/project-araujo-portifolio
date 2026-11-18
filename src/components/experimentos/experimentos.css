@@ -164,10 +164,11 @@ html:has(.ex-rest),body:has(.ex-rest){background:#F6EFE3}
 .ex-rest{--fundo:#F6EFE3;--cartao:#FFFFFF;--texto:#26382C;--suave:#56635A;--linha:#DDD2BE;--linha-forte:#B7AE9A;--destaque:#3E6B4B;--sobre-destaque:#F6EFE3;--foco:#3E6B4B;--erro:#9B2C2C;--peso-titulo:600;--esp-titulo:-.02em}
 .ex-rest .ex-logo{font-weight:600}
 .ex-rest .ex-cab{border-bottom:1px solid var(--linha)}
-.rest-hero{padding-top:56px;padding-bottom:24px;display:flex;flex-direction:column;gap:16px}
+.rest-hero-fundo{position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:center;min-height:clamp(420px,42vw,600px);background:#FBF2E6}
+.rest-hero{position:relative;z-index:1;padding-top:56px;padding-bottom:56px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
 .rest-hero h1{font-size:clamp(40px,6vw,68px);max-width:18ch}
 .rest-hero h1 em{color:var(--destaque)}
-.rest-hero p{color:var(--suave);font-size:18px;max-width:52ch}
+.rest-hero p{color:var(--suave);font-size:18px;max-width:40ch}
 .rest-corpo{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:40px;align-items:start;padding-top:32px;padding-bottom:72px}
 @media (max-width:860px){.rest-corpo{grid-template-columns:1fr;gap:32px;padding-bottom:48px}}
 .rest-cats{display:flex;flex-wrap:wrap;gap:8px}
@@ -213,3 +214,24 @@ html:has(.ex-rest),body:has(.ex-rest){background:#F6EFE3}
   .barb-fundo{--pos:78% 40%}
   .barb-fundo .ex-fundo-vu{background:rgba(26,23,20,.62)}
 }
+
+/* Cantina: camada leve de animação sobre a ilustração (CozinhaAnimada.tsx) */
+.rest-fundo{position:absolute;inset:0;z-index:0;overflow:hidden;background:url(/experimentos/midia/cozinha.jpg) right center/cover no-repeat}
+.rest-fundo svg{position:absolute;inset:0;width:100%;height:100%}
+.rest-fundo-vu{position:absolute;inset:0;display:none}
+.rest-fundo svg *{transform-box:fill-box;transform-origin:center}
+.rest-luz{fill:#fff;opacity:0;animation:rest-luz 9s ease-in-out infinite alternate}
+.rest-fio{fill:none;stroke:#E4D3B8;stroke-width:26;stroke-linecap:round;opacity:0;animation:rest-vapor 7s ease-out infinite}
+.rest-fio-2{animation-delay:1.8s;animation-duration:8s}
+.rest-fio-3{animation-delay:3.6s;animation-duration:7.5s}
+.rest-fio-4{animation-delay:5.2s;animation-duration:8.5s}
+.rest-sopro circle{fill:#EBDDC7}
+.rest-sopro{opacity:0;animation:rest-sopro 16s ease-out 5s infinite both}
+.rest-folha{fill:#2F5E3D;opacity:0;animation:rest-folha 11s ease-out infinite}
+.rest-folha-2{animation-delay:5.5s;animation-duration:12s}
+@keyframes rest-luz{from{opacity:0}to{opacity:.3}}
+@keyframes rest-vapor{0%{opacity:0;transform:translateY(40px) scaleY(.7)}20%{opacity:.75}100%{opacity:0;transform:translate(26px,-90px) scaleY(1.12)}}
+@keyframes rest-sopro{0%{opacity:0;transform:translateY(0) scale(.6)}8%{opacity:1}22%{opacity:0;transform:translateY(-240px) scale(1.6)}100%{opacity:0;transform:translateY(-240px) scale(1.6)}}
+@keyframes rest-folha{0%{opacity:0;transform:translate(0,0) rotate(0)}12%{opacity:.95}45%{opacity:0;transform:translate(36px,-130px) rotate(38deg)}100%{opacity:0;transform:translate(36px,-130px) rotate(38deg)}}
+@media (prefers-reduced-motion:reduce){.rest-luz,.rest-fio,.rest-sopro,.rest-folha{animation:none;opacity:0}}
+@media (max-width:760px){.rest-fundo-vu{display:block;background:rgba(246,239,227,.78)}}

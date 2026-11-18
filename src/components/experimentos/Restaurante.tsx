@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { reais } from '@/lib/experimentos'
 import { AvisoWhatsApp, FaixaExperimento } from './Comum'
+import { CozinhaAnimada } from './CozinhaAnimada'
 
 const NEGOCIO = 'Cantina Exemplo'
 
@@ -63,11 +64,17 @@ export function Restaurante() {
       </header>
 
       <main>
-        <section id="inicio" className="ex-wrap rest-hero" aria-labelledby="rest-titulo">
-          <h1 id="rest-titulo" className="ex-titulo">
-            Comida caseira, <em>feita hoje</em>
-          </h1>
-          <p>Monte seu pedido pelo cardápio do dia e envie direto pelo WhatsApp. Retire no balcão ou receba em casa.</p>
+        <section id="inicio" className="rest-hero-fundo" aria-labelledby="rest-titulo">
+          <CozinhaAnimada />
+          <div className="ex-wrap rest-hero">
+            <h1 id="rest-titulo" className="ex-titulo">
+              Comida caseira, <em>feita hoje</em>
+            </h1>
+            <p>Monte seu pedido pelo cardápio do dia e envie direto pelo WhatsApp. Retire no balcão ou receba em casa.</p>
+            <a className="ex-btn" href="#cardapio">
+              Ver cardápio
+            </a>
+          </div>
         </section>
 
         <div className="ex-wrap rest-corpo">

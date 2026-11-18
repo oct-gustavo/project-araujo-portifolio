@@ -98,8 +98,11 @@ prioriza e acompanha o contato. Uso exclusivo dele (um único usuário).
   fundo; `--pos` define o recorte). Imobiliária: loop + ação (as janelas acendem; o arquivo da ação já vem tocado para a frente
   e de volta, 7,8 s) e texto azul-marinho sobre o céu claro; a busca fica numa caixa de 520px para não cobrir a casa.
   Barbearia: só o loop, numa faixa no topo (`.barb-faixa`); serviços e agendamento ficam abaixo, sem vídeo atrás. No celular
-  entra uma camada chapada por cima (sem degradê). Restaurante: a imagem existe, mas ainda sem clipes (não animado).
-  Clipes sem áudio, 1280x720, <120 KB cada.
+  entra uma camada chapada por cima (sem degradê). Clipes sem áudio, 1280x720, <120 KB cada.
+  Restaurante (Cantina): sem vídeo. A imagem parada (`cozinha.jpg`, no CSS `.rest-fundo`) ganha uma camada leve de SVG em
+  `CozinhaAnimada.tsx` (vapor, sopro maior de vez em quando, folhas de manjericão e a luz da janela respirando), só CSS
+  (transform/opacity) e parada com `prefers-reduced-motion`. As coordenadas seguem a imagem (viewBox 2576x1438,
+  `xMaxYMid slice` = recorte `right center`): se trocar a imagem, refazer as posições.
 
 ## Ordem de construção
 1. Login com 2FA ✔
