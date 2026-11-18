@@ -55,7 +55,7 @@ prioriza e acompanha o contato. Uso exclusivo dele (um único usuário).
   experimentos (3 conceitos com miniaturas só em divs/CSS, `aria-hidden`, etiqueta "Conceito, dados fictícios"),
   como funciona (4 passos), orçamento (formulário) e rodapé (Instagram). Sem prazo nem preço em lugar nenhum.
 - Código em `src/components/site/`: `PaginaUnica.tsx` (seções), `Experimentos.tsx` (miniaturas),
-  `FormularioOrcamento.tsx`, `FundoAnimado.tsx`, `fontes.ts`. Dados de contato em `src/lib/portfolio.ts`.
+  `FormularioOrcamento.tsx`, `FundoAnimado.tsx`, `Abertura.tsx`, `fontes.ts`. Dados de contato em `src/lib/portfolio.ts`.
 - CSS em `src/components/site/pagina-unica.css`, todo preso à classe `.pu` (o CSS global do Next persiste entre rotas).
 - Identidade própria, diferente do painel: estúdio criativo para donos de negócio não técnicos. Tema escuro único:
   fundo `#13111C`, painéis `#1C1A26`/`#242232`, linhas `#34314A`, texto `#EEEAF7`, texto secundário `#AAA5BE`,
@@ -73,8 +73,15 @@ prioriza e acompanha o contato. Uso exclusivo dele (um único usuário).
   22–38 s). `FundoAnimado.tsx` (client) desenha tudo num canvas, pausa fora da tela e não roda com `prefers-reduced-motion`
   ou "economia de dados" (fica só a imagem, que já está no CSS). `/hero/` e `/marca/` estão em `PREFIXOS_PUBLICOS` no `proxy.ts`
   (senão os arquivos cairiam na 404 para visitantes). Os vídeos são sem áudio e comprimidos (<500 KB no total).
-- Abertura: a antiga (A que se encaixa + scanner) foi removida. A nova será um vídeo curto gerado no Flow (a definir);
-  até lá a página abre direto, sem tela de entrada. Fora isso, só transição de borda no hover dos cartões.
+- Abertura (18/nov/2026): a antiga (A que se encaixa + scanner) foi removida. A nova é um clipe de ~2,6 s feito no Flow
+  (`public/hero/abertura.mp4`, ~120 KB, sem áudio: o original de 7,8 s foi cortado e acelerado 1,5x com ffmpeg), tocado por
+  `Abertura.tsx` (client) numa camada fixa por cima da página, uma vez por sessão (`sessionStorage` `araujo:abertura`).
+  O fundo do clipe é quase preto: `mix-blend-mode: lighten` sobre `#13111C` o iguala ao site (o fundo precisa estar no próprio
+  `.pu-abertura-quadro`, porque o `transform` dele isola o grupo de mistura). O cursor "_" não veio no vídeo: é um `<span>`
+  em CSS na posição medida no último quadro (89,3% / 58,75% do quadro 16:9). Pula direto com `prefers-reduced-motion`,
+  "economia de dados", vídeo sem dados em 2 s ou erro ao tocar; clique/toque também pula. O servidor já manda a camada (não
+  pisca o conteúdo) e, sem JavaScript, o CSS a tira sozinho em ~8,5 s. Se gerar outro clipe, remedir a posição do cursor.
+  Fora isso, só transição de borda no hover dos cartões.
 - Formulário não grava nada nem chama servidor: nome, tipo de negócio (select) e "O que você precisa?". O botão é um
   link `wa.me` (`target="_blank" rel="noopener"`) atualizado a cada tecla, com a mensagem
   "Olá! Meu nome é {nome}. Tenho {tipo} e gostaria de um orçamento de site. {texto}" (sem nome: começa só com "Olá!").

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import '@/components/site/pagina-unica.css'
+import { Abertura } from '@/components/site/Abertura'
 import { classesFontes } from '@/components/site/fontes'
 import { Cabecalho, ComoFunciona, Experimentos, Inicio, Orcamento, Rodape } from '@/components/site/PaginaUnica'
 import { ICONE_SITE_PNG } from '@/components/marca/icone-site'
@@ -25,6 +26,7 @@ export const viewport: Viewport = { themeColor: '#13111C' }
 export default function PaginaInicial() {
   return (
     <div className={`pu ${classesFontes}`}>
+      <Abertura />
       <Cabecalho />
       <main>
         <Inicio />
