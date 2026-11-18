@@ -7,16 +7,16 @@ import { SUPABASE_CHAVE_PUBLICA, SUPABASE_URL } from '@/lib/env'
  * 1. gera um nonce novo e aplica a Content-Security-Policy;
  * 2. renova a sessão do Supabase (cookies);
  * 3. decide quem pode ver o quê:
- *    - / e /experimentos/… → página de orçamento e sites experimentais: livres, sem consultar o Supabase (só CSP)
+ *    - / , /experimentos/… e /hero/… → página de orçamento, sites experimentais e vídeos do início: livres, sem consultar o Supabase (só CSP)
  *    - /entrar           → livre (quem já entrou por completo vai para /leads)
  *    - /configurar-2fa   → precisa de senha ok e de NÃO ter 2FA confirmado
  *    - páginas do painel → precisam de senha + 2FA (nível aal2)
  *    - qualquer outro endereço, sem sessão completa → página 404 do portfólio (nunca a página em si)
  * As rotas /api fazem a própria verificação.
  */
-/** Páginas abertas a qualquer visitante: a página de orçamento e os sites experimentais. */
+/** Abertas a qualquer visitante: a página de orçamento, os sites experimentais e os arquivos do fundo do início (/hero/). */
 const ROTAS_PUBLICAS = new Set(['/'])
-const PREFIXOS_PUBLICOS = ['/experimentos/']
+const PREFIXOS_PUBLICOS = ['/experimentos/', '/hero/']
 const ehPublica = (caminho: string) =>
   ROTAS_PUBLICAS.has(caminho) || PREFIXOS_PUBLICOS.some((p) => caminho.startsWith(p))
 

@@ -1,5 +1,6 @@
 import { SimboloSite } from '@/components/marca/Logo'
 import { PORTFOLIO } from '@/lib/portfolio'
+import { FundoAnimado } from './FundoAnimado'
 import { ListaExperimentos } from './Experimentos'
 import { FormularioOrcamento } from './FormularioOrcamento'
 
@@ -32,27 +33,30 @@ export function Cabecalho() {
 
 export function Inicio() {
   return (
-    <section id="inicio" className="pu-wrap pu-inicio" aria-labelledby="inicio-titulo">
-      <h1 id="inicio-titulo" className="pu-h1">
-        Um site que <em>trabalha</em> pelo seu negócio.
-      </h1>
-      <p className="pu-lead">
-        Crio sites sob medida para corretores de imóveis e negócios locais. Você conta o que precisa, recebe uma
-        proposta e acompanha o site ficar pronto.
-      </p>
-      <div className="pu-acoes">
-        <a className="pu-btn pu-btn-cheio pu-btn-grande" href="#orcamento">
-          Pedir orçamento
-        </a>
-        <a className="pu-btn pu-btn-contorno pu-btn-grande" href="#experimentos">
-          Ver experimentos
-        </a>
+    <section id="inicio" className="pu-inicio-fundo" aria-labelledby="inicio-titulo">
+      <FundoAnimado />
+      <div className="pu-wrap pu-inicio">
+        <h1 id="inicio-titulo" className="pu-h1">
+          Um site que <em>trabalha</em> pelo seu negócio.
+        </h1>
+        <p className="pu-lead">
+          Crio sites sob medida para corretores de imóveis e negócios locais. Você conta o que precisa, recebe uma
+          proposta e acompanha o site ficar pronto.
+        </p>
+        <div className="pu-acoes">
+          <a className="pu-btn pu-btn-cheio pu-btn-grande" href="#orcamento">
+            Pedir orçamento
+          </a>
+          <a className="pu-btn pu-btn-contorno pu-btn-grande" href="#experimentos">
+            Ver experimentos
+          </a>
+        </div>
+        <ul className="pu-publico">
+          <li>Corretores e imobiliárias</li>
+          <li>Comércios e serviços locais</li>
+          <li>Orçamento pelo WhatsApp</li>
+        </ul>
       </div>
-      <ul className="pu-publico">
-        <li>Corretores e imobiliárias</li>
-        <li>Comércios e serviços locais</li>
-        <li>Orçamento pelo WhatsApp</li>
-      </ul>
     </section>
   )
 }

@@ -66,6 +66,22 @@ body:has(.pu){background:#13111C}
   .pu-publico{flex-direction:column;gap:10px}
 }
 
+/* ---------- fundo animado do início ---------- */
+.pu-inicio-fundo{position:relative;overflow:hidden;isolation:isolate;background:var(--bg);border-top:1px solid var(--linha)}
+.pu-inicio-fundo .pu-inicio{position:relative;min-height:clamp(560px,78svh,780px);justify-content:center}
+.pu-fundo{position:absolute;inset:0;z-index:-1;pointer-events:none}
+/* a imagem parada já está no CSS: aparece antes do JavaScript e com "reduzir movimento" */
+.pu-palco{position:absolute;inset:0;background:var(--bg) url(/hero/fundo.jpg) right center/cover no-repeat;filter:blur(3.5px);transform-origin:70% 50%;animation:pu-foco 1.4s ease-out both,pu-deriva 40s ease-in-out infinite alternate}
+.pu-tela{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;object-position:right center}
+.pu-poeira{position:absolute;inset:0;width:100%;height:100%}
+/* camada chapada (sem degradê) para o texto ler bem sobre a imagem */
+.pu-fundo-vu{position:absolute;inset:0;background:rgba(19,17,28,.55)}
+.pu-video-oculto{position:absolute;left:0;top:0;width:2px;height:2px;opacity:0;pointer-events:none}
+@keyframes pu-foco{from{filter:blur(30px)}to{filter:blur(3.5px)}}
+@keyframes pu-deriva{from{transform:scale(1.05)}to{transform:translateX(-1.2%) scale(1.09)}}
+@media (prefers-reduced-motion:reduce){.pu-palco{animation:none}}
+@media (max-width:700px){.pu-inicio-fundo .pu-inicio{min-height:0}.pu-palco{background-position:66% center}.pu-tela{object-position:66% center}}
+
 /* ---------- seções ---------- */
 .pu-secao{position:relative;display:flex;flex-direction:column;gap:48px;padding-top:80px;padding-bottom:80px}
 /* a linha de cima fica dentro da margem lateral */
