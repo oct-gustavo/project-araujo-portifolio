@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { reais } from '@/lib/experimentos'
 import { AvisoWhatsApp, FaixaExperimento } from './Comum'
+import { FundoVideo } from './FundoVideo'
 
 const NEGOCIO = 'Casa Exemplo'
 
@@ -115,6 +116,11 @@ export function Imobiliaria() {
 
       <main>
         <section id="inicio" className="imob-hero" aria-labelledby="imob-titulo">
+          <FundoVideo
+            className="imob-fundo"
+            base="/experimentos/midia/imobiliaria-base.mp4"
+            acao="/experimentos/midia/imobiliaria-acao.mp4"
+          />
           <div className="ex-wrap imob-hero-in">
             <h1 id="imob-titulo" className="ex-titulo">
               Encontre seu <em>próximo lar</em>

@@ -91,6 +91,15 @@ prioriza e acompanha o contato. Uso exclusivo dele (um único usuário).
   Cada site tem paleta e fontes próprias (`next/font/google`: Hanken Grotesk + Instrument Serif / Oswald / Fraunces).
   Tudo fictício e só no navegador: busca, agendamento e pedido funcionam, mas o botão de WhatsApp só mostra a mensagem
   que seria enviada (nada é mandado). Páginas com `noindex`. Endereços sempre "Rua Exemplo".
+  Fundos animados (18/nov/2026): a imobiliária e a barbearia têm uma ilustração em vídeo no início (feita no Nano Banana e
+  animada no Flow), desenhada por `FundoVideo.tsx` (client, mesmo esquema do hero: dois `<video>` do clipe base se revezando com
+  fade de 0,5 s, clipe de ação opcional, pausa fora da tela, só a imagem com `prefers-reduced-motion`/economia de dados).
+  Mídia em `public/experimentos/midia/` (`<demo>-base.mp4`, `<demo>-acao.mp4`, `<demo>.jpg` = imagem parada, que o CSS usa de
+  fundo; `--pos` define o recorte). Imobiliária: loop + ação (as janelas acendem; o arquivo da ação já vem tocado para a frente
+  e de volta, 7,8 s) e texto azul-marinho sobre o céu claro; a busca fica numa caixa de 520px para não cobrir a casa.
+  Barbearia: só o loop, numa faixa no topo (`.barb-faixa`); serviços e agendamento ficam abaixo, sem vídeo atrás. No celular
+  entra uma camada chapada por cima (sem degradê). Restaurante: a imagem existe, mas ainda sem clipes (não animado).
+  Clipes sem áudio, 1280x720, <120 KB cada.
 
 ## Ordem de construção
 1. Login com 2FA ✔

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { reais } from '@/lib/experimentos'
 import { AvisoWhatsApp, FaixaExperimento } from './Comum'
+import { FundoVideo } from './FundoVideo'
 
 const NEGOCIO = 'Barbearia Exemplo'
 
@@ -56,13 +57,24 @@ export function Barbearia() {
       </header>
 
       <main>
-        <div id="inicio" className="ex-wrap barb-hero">
-          <section id="servicos" className="barb-hero-txt" aria-labelledby="barb-titulo">
+        <section id="inicio" className="barb-faixa" aria-labelledby="barb-titulo">
+          <FundoVideo className="barb-fundo" base="/experimentos/midia/barbearia-base.mp4" />
+          <div className="ex-wrap barb-faixa-in">
             <h1 id="barb-titulo" className="ex-titulo">
               Corte e barba, <em>no seu horário</em>
             </h1>
             <p>Escolha o serviço, o dia e o horário. A confirmação chega pelo WhatsApp.</p>
-            <h2 className="sr-only">Serviços e preços</h2>
+            <a className="ex-btn" href="#agendar">
+              Agendar horário
+            </a>
+          </div>
+        </section>
+
+        <div className="ex-wrap barb-hero">
+          <section id="servicos" className="barb-hero-txt" aria-labelledby="barb-servicos-titulo">
+            <h2 id="barb-servicos-titulo" className="sr-only">
+              Serviços e preços
+            </h2>
             <ul className="barb-servicos">
               {SERVICOS.map((s) => (
                 <li key={s.nome}>
