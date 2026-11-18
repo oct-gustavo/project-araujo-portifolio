@@ -55,23 +55,26 @@ prioriza e acompanha o contato. Uso exclusivo dele (um único usuário).
   experimentos (3 conceitos com miniaturas só em divs/CSS, `aria-hidden`, etiqueta "Conceito, dados fictícios"),
   como funciona (4 passos), orçamento (formulário) e rodapé (Instagram). Sem prazo nem preço em lugar nenhum.
 - Código em `src/components/site/`: `PaginaUnica.tsx` (seções), `Experimentos.tsx` (miniaturas),
-  `FormularioOrcamento.tsx`, `Abertura.tsx`, `FundoAnimado.tsx`, `fontes.ts`. Dados de contato em `src/lib/portfolio.ts`.
+  `FormularioOrcamento.tsx`, `FundoAnimado.tsx`, `fontes.ts`. Dados de contato em `src/lib/portfolio.ts`.
 - CSS em `src/components/site/pagina-unica.css`, todo preso à classe `.pu` (o CSS global do Next persiste entre rotas).
 - Identidade própria, diferente do painel: estúdio criativo para donos de negócio não técnicos. Tema escuro único:
   fundo `#13111C`, painéis `#1C1A26`/`#242232`, linhas `#34314A`, texto `#EEEAF7`, texto secundário `#AAA5BE`,
   destaque `#9A80F5` (texto sobre o roxo: `#13111C`). Cantos de 3–4px. Sem neon, brilho, gradiente, sombra decorativa
   nem estética de terminal/código/startup. Fonte Epilogue (400/500/600 + itálico) via `next/font/google`;
-  JetBrains Mono 500 só no logotipo "araújo_" (o "_" é roxo). Largura máxima 1200px, margem lateral mínima de 16px.
-- Logo do site: A maciço com traço roxo embaixo (`SimboloSite` e `ICONE_SITE_SVG` em `src/components/marca/Logo.tsx`).
-  O favicon novo vale só para `/` (data URI em `metadata.icons`); o painel continua com `src/app/icon.svg` e `SimboloA`.
+  Largura máxima 1200px, margem lateral mínima de 16px.
+- Logo do site (nova, de 18/nov/2026, feita no Nano Banana): "A" em rede roxo + "araújo" branco em sans + cursor "_" lilás, com
+  brilho na própria arte. É um PNG com fundo transparente em `public/marca/logo-araujo.png` (`LogoSite` em `PaginaUnica.tsx`,
+  usada no cabeçalho, no rodapé e na 404). O favicon é o "A" da logo, em data URI (`src/components/marca/icone-site.ts`) e vale
+  só para `/` e os experimentos; o painel continua com `src/app/icon.svg` e `SimboloA`. Para mexer na logo, gerar de novo o PNG
+  a partir da arte original (fundo escuro vira transparência).
 - Fundo animado do início (decisão do Gustavo, 18/nov/2026): ilustração do quarto (monitores com código) em vídeo, com desfoque
   leve (3,5px), camada escura chapada por cima (sem degradê) e poeira discreta. É a única exceção à regra "sem estética de código".
   Arquivos em `public/hero/` (`fundo.jpg` = imagem parada, `base.mp4` = digitando em loop, `acao.mp4` = espreguiçar, a cada
   22–38 s). `FundoAnimado.tsx` (client) desenha tudo num canvas, pausa fora da tela e não roda com `prefers-reduced-motion`
-  ou "economia de dados" (fica só a imagem, que já está no CSS). `/hero/` está em `PREFIXOS_PUBLICOS` no `proxy.ts`
+  ou "economia de dados" (fica só a imagem, que já está no CSS). `/hero/` e `/marca/` estão em `PREFIXOS_PUBLICOS` no `proxy.ts`
   (senão os arquivos cairiam na 404 para visitantes). Os vídeos são sem áudio e comprimidos (<500 KB no total).
-- Abertura (~1,4 s, CSS puro): as duas metades do A e o traço se encaixam, o scanner preenche e o símbolo voa até o
-  cabeçalho. Com `prefers-reduced-motion` não aparece. Fora isso, só transição de borda no hover dos cartões.
+- Abertura: a antiga (A que se encaixa + scanner) foi removida. A nova será um vídeo curto gerado no Flow (a definir);
+  até lá a página abre direto, sem tela de entrada. Fora isso, só transição de borda no hover dos cartões.
 - Formulário não grava nada nem chama servidor: nome, tipo de negócio (select) e "O que você precisa?". O botão é um
   link `wa.me` (`target="_blank" rel="noopener"`) atualizado a cada tecla, com a mensagem
   "Olá! Meu nome é {nome}. Tenho {tipo} e gostaria de um orçamento de site. {texto}" (sem nome: começa só com "Olá!").

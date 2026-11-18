@@ -1,15 +1,25 @@
-import { SimboloSite } from '@/components/marca/Logo'
+import Image from 'next/image'
 import { PORTFOLIO } from '@/lib/portfolio'
 import { FundoAnimado } from './FundoAnimado'
 import { ListaExperimentos } from './Experimentos'
 import { FormularioOrcamento } from './FormularioOrcamento'
 
-/** Logotipo em texto: "araújo_" com o "_" roxo. */
-export function NomeMarca() {
+/** Logo "araújo_" (A em rede + nome + cursor), PNG com fundo transparente em public/marca/. */
+const LOGO = { src: '/marca/logo-araujo.png', largura: 376, altura: 112 }
+
+export function LogoSite({ altura = 44, alt = '' }: { altura?: number; alt?: string }) {
   return (
-    <span className="pu-nome">
-      araújo<span className="pu-cursor">_</span>
-    </span>
+    <Image
+      className="pu-logo"
+      src={LOGO.src}
+      alt={alt}
+      width={LOGO.largura}
+      height={LOGO.altura}
+      style={{ height: altura, width: 'auto' }}
+      loading="eager"
+      fetchPriority="high"
+      unoptimized
+    />
   )
 }
 
@@ -17,8 +27,7 @@ export function Cabecalho() {
   return (
     <header className="pu-wrap pu-cab">
       <a className="pu-marca" href="#inicio" aria-label="araújo_, início">
-        <SimboloSite tamanho={32} className="pu-simbolo" />
-        <NomeMarca />
+        <LogoSite altura={44} />
       </a>
       <nav className="pu-links" aria-label="Principal">
         <a href="#experimentos">Experimentos</a>
@@ -123,7 +132,7 @@ export function Orcamento() {
 export function Rodape() {
   return (
     <footer className="pu-wrap pu-rodape">
-      <NomeMarca />
+      <LogoSite altura={32} alt="araújo_" />
       <a href={PORTFOLIO.contato.instagramUrl}>Instagram {PORTFOLIO.contato.instagramTexto}</a>
     </footer>
   )

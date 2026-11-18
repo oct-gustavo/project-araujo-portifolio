@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import '@/components/site/pagina-unica.css'
 import { classesFontes } from '@/components/site/fontes'
-import { SimboloSite } from '@/components/marca/Logo'
-import { NomeMarca, Rodape } from '@/components/site/PaginaUnica'
+import { LogoSite, Rodape } from '@/components/site/PaginaUnica'
 
 export const metadata: Metadata = {
   title: 'Página não encontrada | araújo_',
@@ -16,8 +15,7 @@ export default function NaoEncontrada() {
     <div className={`pu ${classesFontes}`}>
       <header className="pu-wrap pu-cab">
         <Link className="pu-marca" href="/" aria-label="araújo_, início">
-          <SimboloSite tamanho={32} className="pu-simbolo" />
-          <NomeMarca />
+          <LogoSite altura={44} />
         </Link>
         <Link className="pu-btn pu-btn-cheio pu-btn-cab" href="/#orcamento">
           Pedir orçamento

@@ -1,4 +1,4 @@
-import { Epilogue, JetBrains_Mono } from 'next/font/google'
+import { Epilogue } from 'next/font/google'
 
 /**
  * Fontes do site público. O next/font baixa os arquivos no build e serve do próprio domínio
@@ -12,12 +12,4 @@ export const epilogue = Epilogue({
   display: 'swap',
 })
 
-/** Só para o logotipo "araújo_". */
-export const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: '500',
-  variable: '--fonte-logo',
-  display: 'swap',
-})
-
-export const classesFontes = `${epilogue.variable} ${jetbrainsMono.variable}`
+export const classesFontes = epilogue.variable
